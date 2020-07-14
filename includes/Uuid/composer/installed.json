@@ -1,0 +1,112 @@
+[
+    {
+        "name": "phossa2/shared",
+        "version": "2.0.28",
+        "version_normalized": "2.0.28.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phossa2/shared.git",
+            "reference": "8fe3a590555e522523f51778b5384c3af86e669b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/phossa2/shared/zipball/8fe3a590555e522523f51778b5384c3af86e669b",
+            "reference": "8fe3a590555e522523f51778b5384c3af86e669b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2017-01-08T06:32:47+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phossa2\\Shared\\": "src/Shared/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hong Zhang",
+                "homepage": "https://github.com/phossa2"
+            }
+        ],
+        "description": "The shared library for other phossa2 libraries",
+        "homepage": "https://github.com/phossa2/shared",
+        "keywords": [
+            "framework",
+            "library",
+            "phossa",
+            "phossa2",
+            "php"
+        ]
+    },
+    {
+        "name": "phossa2/uuid",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phossa2/uuid.git",
+            "reference": "3b6aa326e15c444683bee645c1cbffbc6c421659"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/phossa2/uuid/zipball/3b6aa326e15c444683bee645c1cbffbc6c421659",
+            "reference": "3b6aa326e15c444683bee645c1cbffbc6c421659",
+            "shasum": ""
+        },
+        "require": {
+            "phossa2/shared": "^2.0.21",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2016-09-29T07:20:06+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phossa2\\Uuid\\": "src/Uuid/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hong Zhang",
+                "homepage": "https://github.com/phossa2"
+            }
+        ],
+        "description": "A PHP lib to generate sequential/time based uuid for using as PK in DB.",
+        "homepage": "https://github.com/phossa2/uuid",
+        "keywords": [
+            "framework",
+            "phossa",
+            "phossa2",
+            "uuid"
+        ]
+    }
+]

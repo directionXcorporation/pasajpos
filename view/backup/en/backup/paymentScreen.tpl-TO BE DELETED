@@ -1,0 +1,289 @@
+<div class="w3-container" data-ng-controller="parentobj.controllers.paymentScreen" ng-cloak>
+	<md-toolbar class="md-table-toolbar md-default">
+		<div class="md-toolbar-tools">
+			<span>{{_Payment_Screen_Templates}}</span>
+			<span flex></span>
+			<md-button data-ng-click="parentobj.getPaymentScreenDetails('','create');">
+				<md-icon aria-label="Add New Payment Screen" class="material-icons">
+					add_box
+	        		</md-icon>
+        		</md-button>
+		</div>
+	</md-toolbar>
+	<div ui-i18n="{{_LANG}}">
+		<md-toolbar class="md-hue-2">
+			<div class="md-toolbar-tools">
+				<div flex>
+				<md-input-container>
+					<md-select aria-label="{{_Change View}}" data-ng-model="privatedata.paymentScreenSelectedView" data-ng-change="changeTableView(privatedata.paymentScreenSelectedView)">
+						<md-option data-ng-repeat="availablePaymentScreenView in privatedata.availablePaymentScreenViews" data-ng-value="availablePaymentScreenView" data-ng-selected="$first">
+							{{availablePaymentScreenView.viewName}}
+						</md-option>
+					</md-select>
+				</md-input-container>
+				</div>
+				<md-button id="deletePaymentScreenTableView" class="md-icon-button" aria-label="{{_Delete view}}" data-ng-if="isAllowedToSavePaymentScreenView" data-ng-show="privatedata.paymentScreenSelectedView.viewId" data-ng-click="parentobj.confirmDeleteSelectedView(privatedata.paymentScreenSelectedView.viewId, 'deletePaymentScreenTableView');">
+					<md-icon class='material-icons'>delete</md-icon>
+				</md-button>
+				<md-button id="savePaymentScreenTableView" class="md-icon-button" aria-label="{{_Save view}}" data-ng-if="isAllowedToSavePaymentScreenView" data-ng-show="saveNewState && !privatedata.paymentScreenSelectedView.viewId" data-ng-click="parentobj.saveTableView('paymentScreen',paymentScreenGridApi.saveState.save(),'savePaymentScreenTableView',privatedata.availablePaymentScreenViews);">
+					<md-icon class='material-icons'>save</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<div id="paymentScreenTable" ui-grid="paymentScreenGridOption" class="data-grid" {{ui-grid-selection}} ui-grid-resize-columns ui-grid-pinning ui-grid-move-columns ui-grid-exporter ui-grid-grouping ui-grid-pagination ui-grid-auto-resize ui-grid-save-state></div>
+		<md-input-container>
+			<md-switch aria-label="{{_Show Field Names}}" data-ng-model="tableProperties.showFieldNames" data-ng-true-value="1" data-ng-false-value="0">
+				{{_Show Field Names}}
+			</md-switch>
+		</md-input-container>
+	</div>
+	<script type="text/ng-template" id="editPaymentScreen.html">
+		<md-dialog aria-label="{{_EDITING}} {{privatedata.record['paymentScreenDetail_paymentScreenName']}}" flex="noshrink">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2>{{_EDITING}} {{privatedata.record['paymentScreenDetail_paymentScreenName']}}</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" data-ng-click="clickToClose(privatedata.record)">
+						<md-icon aria-label="Close Payment Screen Edit" md-font-icon="close" data-fittext>close</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-dialog-content flex="noshrink">
+				<md-progress-linear md-mode="query" data-ng-disabled="!formDisabled"></md-progress-linear>
+				<md-tabs md-dynamic-height md-border-bottom>
+						<md-tab label="{{_BASIC_DETAILS}}">
+							<md-content class="md-padding">
+								<fieldset>
+									<form name="paymentScreenDetails" data-ng-disabled="formDisabled">
+										<div layout-gt-xs="row">
+											<md-input-container class="md-icon-float md-block" flex-gt-xs>
+												<label>{{_PAYMENTSCREEN_NAME}}</label>
+												<input type="text" data-ng-model="privatedata.record['paymentScreenDetail_paymentScreenName']" />
+											</md-input-container>
+										</div>
+										<div layout-gt-xs="row">
+											<div json-text style="overflow:auto;width:80%;height:300px;">
+												{{privatedata.record['paymentScreenDetail_paymentScreenData']}}
+											</div>
+											<md-button id="openVisualEditor" class="md-fab" aria-label="{{_Visual Editor}}"  data-ng-click="parentobj.openPaymentScreenVisualEditor(privatedata.record['paymentScreenDetail_paymentScreenData']);">
+												<md-icon class="material-icons">visibility</md-icon>
+											</md-button>
+										</div>
+									</form>
+									<form name="paymentScreenStatus" data-ng-disabled="formDisabled">
+										<div layout="row">
+											<md-input-container class="md-icon-float md-block" flex-gt-xs>
+												<md-switch ng-model="privatedata.record['paymentScreenStatus_status']" aria-label="{{_PAYMENTSCREEN_STATUS}}" ng-true-value="'1'" ng-false-value="'0'" class="md-primary">
+													{{_PAYMENTSCREEN_STATUS}}
+												</md-switch>
+											</md-input-container>
+										</div>
+									</form>	
+								</fieldset>	
+							</md-content>
+						</md-tab>
+				</md-tabs>
+				<md-dialog-actions layout="row" style="font-size:2.3vw;" data-ng-hide="formDisabled">
+					<md-button class="md-raised md-primary" data-ng-click="clickToSave(privatedata.record)" >
+						{{_SAVE}}
+					</md-button>
+					<md-button class="md-raised" data-ng-click="clickToClose(privatedata.record)">
+						{{_CANCEL}}
+					</md-button>
+				</md-dialog-actions>
+			</md-dialog-content>
+		</md-dialog>
+	</script>
+	<script type="text/ng-template" id="paymentScreenChangeOK.html">
+		<md-toast>
+			{{_PaymentScreen updated successfully}}
+		</md-toast>
+	</script>
+	<script type="text/ng-template" id="gridRowMenu.html">
+		<div layout-align="start center" layout="column">	
+			<md-menu md-position-mode="target-right target"> 
+				<md-button aria-label="Open interactions menu" class="md-icon-button" data-ng-click="$mdMenu.open(ev)">
+					<md-icon md-menu-origin class="material-icons">menu</md-icon> 
+				</md-button>
+				<md-menu-content width="2">
+					<md-menu-item id="edit_{{row.entity['paymentScreenDetail_paymentScreenId']}}">
+						<md-button ng-click="grid.appScope.parentobj.getPaymentScreenDetails(row.entity);">
+							<md-icon md-menu-align-target calss="material-icons" md-menu-align-target>edit</md-icon>
+							{{_Edit}}
+						</md-button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+	</script>
+	<script type="text/ng-template" id="paymentScreenVisualEditor.html">
+		<style>
+			{{data.options.customCss}}
+		</style>
+		<md-dialog class="fullscreen-dialog" aria-label="{{_Visual Editor}}">
+			<md-toolbar class="md-hue-2">
+				<div class="md-toolbar-tools">
+					<h2>{{_Visual Editor}}</h2>
+					<md-button class="md-icon-button" data-ng-click="openGridsterOptions(data.options)" id="openGridsterOptions">
+						<md-icon aria-label="Open Options">build</md-icon>
+					</md-button>
+					<md-button class="md-icon-button" data-ng-click="openElementSelection()" id="openElementSelection">
+						<md-icon aria-label="Add New Element">widgets</md-icon>
+					</md-button>
+					<md-button class="md-icon-button" data-ng-click="clickToSave(data)">
+						<md-icon aria-label="Save Payment Screen Data">save</md-icon>
+					</md-button>
+					<span flex></span>
+					<md-button class="md-icon-button" data-ng-click="clickToClose(data)">
+						<md-icon aria-label="Close Payment Screen {{_Visual Editor}}">close</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-dialog-content flex="noshrink">
+				<md-progress-linear md-mode="query" data-ng-disabled="!formDisabled"></md-progress-linear>
+				<div data-gridster="data.options">
+					<ul>
+						<li data-gridster-item="item" data-ng-repeat="item in data.items">
+							<div bind-html-compile="item.element" style="width:99%;height:95%;"></div>
+						</li>
+					</ul>
+				</div>
+			</md-dialog-content>
+		</md-dialog>
+	</script>
+	<script type="text/ng-template" id="GridsterOptions.html">
+		<md-dialog aria-label="{{_Payment Screen Options}}">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2>{{_Payment Screen Options}}</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" data-ng-click="clickToClose(options)">
+						<md-icon aria-label="Close {{_Payment Screen Options}}" data-fittext>close</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-dialog-content>
+				<md-input-container class="md-block">
+					<label>{{_NUMBER OF COLUMNS}}</label>
+					<input type="text" data-ng-model="options.columns" />
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{_X MARGIN}}</label>
+					<input type="text" data-ng-model="options.margins[0]" />
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{_Y MARGIN}}</label>
+					<input type="text" data-ng-model="options.margins[1]" />
+				</md-input-container>
+				<md-switch class="md-primary" md-no-ink aria-label="{{_ITEM swapping}}" ng-model="options.swapping" ng-true-value="true" ng-false-value="false">
+					{{_ITEM swapping}}
+				</md-switch>
+				<md-input-container class="md-block">
+					<label>{{_CUSTOM_CSS}}</label>
+					<textarea ng-model="options.customCss" rows="5" md-select-on-focus></textarea>
+				</md-input-container>
+				<md-dialog-actions layout="row" style="font-size:2.3vw;" data-ng-hide="formDisabled">
+					<md-button class="md-raised md-primary" data-ng-click="clickToSave(options)" >
+						{{_SAVE}}
+					</md-button>
+					<md-button class="md-raised" data-ng-click="clickToClose(options)">
+						{{_CANCEL}}
+					</md-button>
+				</md-dialog-actions>
+			</md-dialog-content>
+		</md-dialog>
+	</script>
+	
+	<script type="text/ng-template" id="GridsterElements.html">
+		<md-dialog aria-label="{{_Payment Screen Elements}}">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2>{{_Payment Screen Elements}}</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" data-ng-click="clickToClose()">
+						<md-icon aria-label="Close {{_Payment Screen Elements}}" data-fittext>close</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-dialog-content>
+				<md-button class="md-raised" data-ng-click='makeModule(module.type, module.parameters, addModule)' data-ng-repeat="module in availableModules">
+					{{module.name}}
+					<md-tooltip md-direction="top">{{module.description}}</md-tooltip>
+				</md-button>
+				<md-dialog-actions layout="row" style="font-size:2.3vw;" data-ng-hide="formDisabled">
+					<md-button class="md-raised" data-ng-click="clickToClose()">
+						{{_CANCEL}}
+					</md-button>
+				</md-dialog-actions>
+			</md-dialog-content>
+		</md-dialog>
+	</script>
+	<script type="text/ng-template" id="modules_fixed.html">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>{{_FIXED_TEXT}}</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" data-ng-click="clickToClose()">
+					<md-icon aria-label="Close {{_FIXED_TEXT}}" data-fittext>close</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<md-content class="md-padding">
+				<md-input-container class="md-block">
+					<label>{{_CUSTOM_CSS_CLASS}}</label>
+					<input type="text" data-ng-model="class" />
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{_TEXT}}</label>
+					<textarea ng-model="text" rows="3" md-select-on-focus></textarea>
+				</md-input-container>
+			</md-content>
+			<md-dialog-actions layout="row" style="font-size:2.3vw;" data-ng-hide="formDisabled">
+				<md-button class="md-raised" data-ng-click="hide()">
+					{{_SAVE}}
+				</md-button>
+				<md-button class="md-raised" data-ng-click="cancel()">
+					{{_CANCEL}}
+				</md-button>
+			</md-dialog-actions>
+		</md-dialog-content>
+		
+	</script>
+	<script type="text/ng-template" id="modules_button.html">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>{{_BUTTON}}</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" data-ng-click="clickToClose()">
+					<md-icon aria-label="Close {{_BUTTON}}" data-fittext>close</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<md-content class="md-padding">
+				<md-input-container class="md-block">
+					<label>{{_CUSTOM_CSS_CLASS}}</label>
+					<input type="text" data-ng-model="class" />
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{_TEXT ON BUTTON}}</label>
+					<input type="text" data-ng-model="text" />
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>{{_ACTION}}</label>
+					<input type="text" data-ng-model="action" />
+				</md-input-container>
+			</md-content>
+			<md-dialog-actions layout="row" style="font-size:2.3vw;" data-ng-hide="formDisabled">
+				<md-button class="md-raised" data-ng-click="hide()">
+					{{_SAVE}}
+				</md-button>
+				<md-button class="md-raised" data-ng-click="cancel()">
+					{{_CANCEL}}
+				</md-button>
+			</md-dialog-actions>
+		</md-dialog-content>
+	</script>
+	
+</div>

@@ -1,0 +1,1 @@
+<md-button class='till-button md-raised md-primary' data-ng-click='$ctrl.onclickwrapper();'><span translate>{{$ctrl.text}}</span></md-button>

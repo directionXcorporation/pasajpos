@@ -1,0 +1,2 @@
+<div data-ng-if="$ctrl.receiptIsLoading" translate>Loading Receipt...</div>
+<div data-ng-hide="$ctrl.receiptIsLoading" class="data-grid" ui-grid="$ctrl.gridoptions" ui-grid-auto-resize style="height: calc(100% - 50px) !important;"></div>

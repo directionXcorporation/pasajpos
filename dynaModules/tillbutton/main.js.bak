@@ -1,0 +1,14 @@
+vm.onclickwrapper = function(){
+    logService.setlog(['till button clicked',{checkaccess: vm.checkaccess, 'onclickparams': vm.onclickparams}], 'debug');
+    if(vm.checkaccess && vm.checkaccess.functionId){
+        let params = vm.onclickparams || [];
+        let isAllowed = true;
+        
+        if(vm.checkaccess.isAllowed  !== undefined){
+            isAllowed = vm.checkaccess.isAllowed;
+        }
+        functionAccess.runFunctionWithAccessCheck(function () { vm.onclickfunction.apply(null, vm.onclickparams); }, vm.checkaccess.functionId, params, isAllowed);
+    }else{
+	    vm.onclickfunction.apply(null, vm.onclickparams);
+    }
+}

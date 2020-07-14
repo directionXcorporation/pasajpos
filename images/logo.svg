@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="930px" height="500px" viewBox="0 0  930 500" preserveAspectRatio="xMidYMid meet" >
+	<line id="e2_line" x1="272" y1="353" x2="271" y2="260" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<path d="M271,262a34.2026306678,34.2026306678,0,1,1,62,28" style="fill:none;stroke:black;stroke-width:10px;" id="e4_circleArc"/>
+	<line id="e5_line" x1="370" y1="352" x2="371" y2="268" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<line id="e6_line" x1="462" y1="352" x2="463" y2="270" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<path d="M371,271a51.7457046076,51.7457046076,0,0,1,93,2" style="fill:none;stroke:black;stroke-width:10px;" id="e7_circleArc"/>
+	<line id="e8_line" x1="396" y1="351" x2="396" y2="314" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<line id="e9_line" x1="436" y1="352" x2="436" y2="315" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<path d="M395,318a22.1359436212,22.1359436212,0,0,1,42,0" style="fill:none;stroke:black;stroke-width:10px;" id="e10_circleArc"/>
+	<line id="e1_line" x1="605" y1="353" x2="606" y2="269" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<line id="e3_line" x1="697" y1="353" x2="698" y2="271" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<path d="M606,272a51.7457046076,51.7457046076,0,0,1,93,2" style="fill:none;stroke:black;stroke-width:10px;" id="e3_circleArc"/>
+	<line id="e4_line" x1="631" y1="352" x2="631" y2="315" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<line id="e7_line" x1="671" y1="353" x2="671" y2="316" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<path d="M630,319a22.1359436212,22.1359436212,0,0,1,42,0" style="fill:none;stroke:black;stroke-width:10px;" id="e8_circleArc"/>
+	<line id="e11_line" x1="806" y1="241" x2="805" y2="327" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<path d="M745,306a33.1930056378,33.1930056378,0,1,0,60,18" style="fill:none;stroke:black;stroke-width:10px;" id="e12_circleArc"/>
+	<line id="e13_line" x1="579" y1="258" x2="559" y2="259" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<line id="e14_line" x1="579" y1="290" x2="534" y2="292" style="stroke:black;fill:none;stroke-width:10px;"/>
+	<path d="M565,256a32.372503,32.372503,0,0,0,-61,5" style="fill:none;stroke:black;stroke-width:10px;" id="e15_circleArc"/>
+	<path d="M540,293q-39,-10,-35,-35" style="fill:none;stroke:black;stroke-width:10px;" id="e17_arc2"/>
+	<path d="M538,294a26.01987,26.01987,0,1,1,-2,52" style="fill:none;stroke:black;stroke-width:10px;" id="e18_circleArc"/>
+	<path d="M538,346q-22,2,-33,-8" style="fill:none;stroke:black;stroke-width:10px;" id="e22_arc2"/>
+</svg>

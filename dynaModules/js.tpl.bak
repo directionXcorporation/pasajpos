@@ -1,0 +1,43 @@
+try{
+    if(loadedDirectives.indexOf('{{_ID}}') < 0){
+        loadedDirectives.push('{{_ID}}');
+        app.component('{{_ID}}', {
+            templateUrl: "moduleTemplate_{{_ID}}.tpl",
+            controller: componentController_{{_ID}},
+            controllerAs: "$ctrl",
+            bindings: { {{_PARAMETERS}} }
+        });
+        function componentController_{{_ID}}(logService, functionAccess, loginService, onlineStatus, tableMapsService, moment, $scope, $log, $translate, $timeout, $stateParams, $stateRegistry, $mdSidenav, $mdBottomSheet, $element, $state {{_INJECTIONS}}) {
+            let vm = this;
+            logService.setlog(["Directive loaded",{name: "{{_ID}}", parameters: "{{_PARAMETERS}}" }], "debug");
+            vm.checkFunctionAccess = functionAccess.checkAccess;
+            try{
+                vm.$onInit = function() {
+                    logService.setlog(["Initializing component: {{_ID}}"], "debug");
+                    
+                    {{_FUNCTIONS}}
+                    
+                   	{{_JAVASCRIPT}}
+                   	
+                   	vm.scopeLoaded = true;
+               	}
+               	vm.$onChanges = function(changesObj){
+               	    logService.setlog(["one change of parameters for component: {{_ID}}", changesObj], "debug");
+               	}
+               	vm.$doCheck = function(){
+               	    logService.setlog(["one digest for component: {{_ID}}", { {{_PARAMETERS}} }], "debug");
+               	}
+               	vm.$postLink = function(){
+               	    logService.setlog(["created component: {{_ID}}"], "debug");
+               	}
+               	vm.$onDestroy = function(){
+               	    logService.setlog(["destroyed component: {{_ID}}"], "debug");
+               	}
+        	}catch(e){
+        		logService.setlog(e, "error", 0);
+        	}
+        }
+    }
+}catch(e){
+    logService.setlog(["Error in setting up module: {{_ID}}", e], "error", 0);
+}

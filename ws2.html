@@ -1,0 +1,12 @@
+<html>
+<body>
+    <div id="root"></div>
+    <script>
+        var host = 'wss://demo.pasajpos.com:9302/ws2.php';
+        var socket = new WebSocket(host);
+        socket.onmessage = function(e) {
+            document.getElementById('root').innerHTML = e.data;
+        };
+    </script>
+</body>
+</html>

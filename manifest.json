@@ -1,0 +1,21 @@
+{
+  "short_name": "PASAJ",
+  "name": "PASAJ POS",
+  "icons": [
+    {
+      "src": "/images/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#1b4a96",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#1b4a96"
+}
